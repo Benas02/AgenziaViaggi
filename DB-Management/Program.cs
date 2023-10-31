@@ -1,8 +1,10 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 
+/*
 // Define the connection string to the SQL Server database
-string connectionString = "Data Source=(local); Initial Catalog=prenotazioni; Integrated Security=True";
+string connectionString = "Data Source=(local);Initial Catalog=prenotazioni;Integrated Security=True";
+*/
 
 // Define the SQL query to select data from the 'clienti' table
 string queryString = "SELECT * FROM clienti WHERE id_cliente < 10";
@@ -14,10 +16,11 @@ SqlDataReader reader;                   // Represents a forward-only stream of d
 SqlDataAdapter adapter;                 // Represents a set of data commands
 DataTable dataTable;                    // Represents an in-memory table to store data
 
+/*
 // Create a connection to the database using the connection string
 using (connection = new SqlConnection(connectionString))
 {
-
+    #region "Lettura Database Reader"
     // Create a SQL command with the query and the database connection
     command = new SqlCommand(queryString, connection);
 
@@ -35,6 +38,7 @@ using (connection = new SqlConnection(connectionString))
 
     // Close the SqlDataReader to release resources
     reader.Close();
+    #endregion
 
 // ------------------------------------------------------------------------------------------------
 
@@ -42,6 +46,7 @@ using (connection = new SqlConnection(connectionString))
 
 // ------------------------------------------------------------------------------------------------
 
+    #region "Lettura Database DataSet"
     // Create a new SqlDataAdapter and associate it with a query string and a database connection.
     adapter = new SqlDataAdapter(queryString, connection);
 
@@ -58,8 +63,9 @@ using (connection = new SqlConnection(connectionString))
     foreach (DataRow row in dataTable.Rows)
     {
         // Print the values of "id_cliente," "nome," and "cognome" columns for the current row to the console.
-        Console.WriteLine($"{row["id_cliente"]} \t{row["nome"], -10} \t{row["cognome"]}");
+        Console.WriteLine($"{row["id_cliente"]} \t{row["nome"],-10} \t{row["cognome"]}");
     }
+    #endregion
 
 // ------------------------------------------------------------------------------------------------
 
@@ -67,7 +73,8 @@ using (connection = new SqlConnection(connectionString))
 
 // ------------------------------------------------------------------------------------------------
 
-    string textNome, textCognome;
+    #region " Lettura Database con Parametri"
+        string textNome, textCognome;
 
     Console.Write("Nome: ");
     textNome = Console.ReadLine();
@@ -97,31 +104,8 @@ using (connection = new SqlConnection(connectionString))
         Console.WriteLine($"{row["nome"]} \t{row["cognome"],-10} \t{row["arrivo"], -10} \t" +
             $"{ row["partenza"]} \t{ row["importo"],-10} \t{ row["tipo_struttura"], -10}");
     }
-    
-// ------------------------------------------------------------------------------------------------
-
-    Console.WriteLine("\n--------------------------------------------------\n");
+    #endregion
 
 // ------------------------------------------------------------------------------------------------
 
-    string regione, areaGeografica;
-
-    Console.Write("Regione: ");
-    regione = Console.ReadLine();
-
-    Console.Write("Area Geografica: ");
-    areaGeografica = Console.ReadLine();
-
-    queryString = "INSERT INTO regioni (regione, area_geografica) " +
-        "VALUES ('" + regione + "', '" + areaGeografica + "')";
-
-    // Create a SQL command with the query and the database connection
-    command = new SqlCommand(queryString, connection);
-
-    // Open the database connection
-    connection.Open();
-
-    command.ExecuteNonQuery();
-
-    // ------------------------------------------------------------------------------------------------
-}
+*/

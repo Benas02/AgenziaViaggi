@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DB-Management", "DB-Managem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "classReservations", "classReservations\classReservations.csproj", "{37D4DBDF-DAE0-417F-8CC5-6EE5AB3182E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestReservation", "TestReservation\TestReservation.csproj", "{CA5C63D5-990E-462B-91D5-4FF23A826950}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{37D4DBDF-DAE0-417F-8CC5-6EE5AB3182E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37D4DBDF-DAE0-417F-8CC5-6EE5AB3182E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37D4DBDF-DAE0-417F-8CC5-6EE5AB3182E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA5C63D5-990E-462B-91D5-4FF23A826950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA5C63D5-990E-462B-91D5-4FF23A826950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA5C63D5-990E-462B-91D5-4FF23A826950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA5C63D5-990E-462B-91D5-4FF23A826950}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
