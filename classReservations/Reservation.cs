@@ -77,10 +77,15 @@ namespace classReservations
             string queryString;
             SqlCommand command;                     // Represents a SQL command to be executed
             DataTable dataTable;                    // Represents an in-memory table to store data
-            DataSet dataSet;         
+            DataSet dataSet;
 
-            // Define the SQL query to retrieve data from the "clienti" table
-            queryString = "SELECT * FROM clienti WHERE nome = '" + nome + "' AND cognome = '" + cognome + "'";
+            queryString = "SELECT * FROM clienti";
+
+            if ((nome != "") && (cognome != ""))
+            {
+                // Define the SQL query to retrieve data from the "clienti" table
+                queryString += $" WHERE nome = '{nome}' AND cognome = '{cognome}'";
+            }
 
             // Create a new SQL command with the query and a database connection
             command = new SqlCommand(queryString, this.connection);
@@ -96,6 +101,66 @@ namespace classReservations
 
             // Retrieve the DataTable containing the data from the dataset
             dataTable = dataSet.Tables["Clienti"];
+
+            // Return the DataTable containing the retrieved data
+            return dataTable;
+        }
+        #endregion
+
+        #region "Reservation"
+        public DataTable Reservations()
+        {
+            string queryString;
+            SqlCommand command;                     // Represents a SQL command to be executed
+            DataTable dataTable;                    // Represents an in-memory table to store data
+            DataSet dataSet;                        // Represents a dataset to hold multiple tables
+
+            // Define the SQL query to retrieve data from the "clienti" table
+            queryString = "SELECT * FROM prenotazioni";
+
+            // Create a new SQL command with the query and a database connection
+            command = new SqlCommand(queryString, this.connection);
+
+            // Create a data adapter with the query and the same database connection
+            adapter = new SqlDataAdapter(queryString, this.connection);
+
+            // Create a new dataset to store the retrieved data
+            dataSet = new DataSet();
+
+            // Fill the dataset with data from the "clienti" table
+            adapter.Fill(dataSet, "Prenotazioni");
+
+            // Retrieve the DataTable containing the data from the dataset
+            dataTable = dataSet.Tables["Prenotazioni"];
+
+            // Return the DataTable containing the retrieved data
+            return dataTable;
+        }
+
+        public DataTable Reservations(int IDReservations)
+        {
+            string queryString;
+            SqlCommand command;                     // Represents a SQL command to be executed
+            DataTable dataTable;                    // Represents an in-memory table to store data
+            DataSet dataSet;                        // Represents a dataset to hold multiple tables
+
+            // Define the SQL query to retrieve data from the "clienti" table
+            queryString = $"SELECT * FROM prenotazioni WHERE ID_prenotazione = {IDReservations}";
+
+            // Create a new SQL command with the query and a database connection
+            command = new SqlCommand(queryString, this.connection);
+
+            // Create a data adapter with the query and the same database connection
+            adapter = new SqlDataAdapter(queryString, this.connection);
+
+            // Create a new dataset to store the retrieved data
+            dataSet = new DataSet();
+
+            // Fill the dataset with data from the "clienti" table
+            adapter.Fill(dataSet, "Prenotazioni");
+
+            // Retrieve the DataTable containing the data from the dataset
+            dataTable = dataSet.Tables["Prenotazioni"];
 
             // Return the DataTable containing the retrieved data
             return dataTable;

@@ -47,6 +47,76 @@ namespace TestReservation
                 //test DB contains 5 customers
                 throw new Exception("Customers Count Doesn't Match");
             }
+
+            customers = reservation.Customers("Leo", "Messi");
+
+            if (customers == null)
+            {
+                throw new Exception("Customers Load Failed");
+            }
+
+            if (customers.Rows.Count != 0)
+            {
+                //test DB contains 5 customers
+                throw new Exception("Customers Count Doesn't Match");
+            }
+        }
+        #endregion
+
+        #region "Count Reservations"
+        [TestMethod]
+        public void Reservations()
+        {
+            Reservation reservation = new Reservation();
+            DataTable customers;
+
+            customers = reservation.Reservations();
+
+            if (customers == null)
+            {
+                throw new Exception("Reservations Load Failed");
+            }
+
+            if (customers.Rows.Count != 9268)
+            {
+                //test DB contains 9268 customers
+                throw new Exception("Reservations Count Doesn't Match");
+            }
+        }
+        #endregion
+
+        #region "Reservations ID"
+        [TestMethod]
+        public void ReservationsID()
+        {
+            Reservation reservation = new Reservation();
+            DataTable customers;
+
+            customers = reservation.Reservations(21);
+
+            if (customers == null)
+            {
+                throw new Exception("Reservations Load Failed");
+            }
+
+            if (customers.Rows.Count != 1)
+            {
+                //test DB contains 5 customers
+                throw new Exception("Reservations Count Doesn't Match");
+            }
+
+            customers = reservation.Reservations(12345);
+
+            if (customers == null)
+            {
+                throw new Exception("Reservations Load Failed");
+            }
+
+            if (customers.Rows.Count != 0)
+            {
+                //test DB contains 5 customers
+                throw new Exception("Reservations Count Doesn't Match");
+            }
         }
         #endregion
     }
