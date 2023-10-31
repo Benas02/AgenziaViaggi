@@ -101,7 +101,7 @@ namespace TestReservation
 
             if (customers.Rows.Count != 1)
             {
-                //test DB contains 5 customers
+                //test DB contains 1 customers
                 throw new Exception("Reservations Count Doesn't Match");
             }
 
@@ -114,7 +114,42 @@ namespace TestReservation
 
             if (customers.Rows.Count != 0)
             {
-                //test DB contains 5 customers
+                //test DB contains 0 customers
+                throw new Exception("Reservations Count Doesn't Match");
+            }
+        }
+        #endregion
+
+        #region "Reservations Nome e Cognome"
+        [TestMethod]
+        public void ReservationsNameSurname()
+        {
+            Reservation reservation = new Reservation();
+            DataTable customers;
+
+            customers = reservation.Reservations("Claudio", "Rossi");
+
+            if (customers == null)
+            {
+                throw new Exception("Reservations Load Failed");
+            }
+
+            if (customers.Rows.Count != 30)
+            {
+                //test DB contains 30 customers
+                throw new Exception("Reservations Count Doesn't Match");
+            }
+
+            customers = reservation.Reservations("Leo", "Messi");
+
+            if (customers == null)
+            {
+                throw new Exception("Reservations Load Failed");
+            }
+
+            if (customers.Rows.Count != 0)
+            {
+                //test DB contains 0 customers
                 throw new Exception("Reservations Count Doesn't Match");
             }
         }

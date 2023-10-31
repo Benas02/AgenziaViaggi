@@ -1,111 +1,122 @@
 ﻿using System.Data;
-using System.Data.SqlClient;
+using System.Runtime.CompilerServices;
+using classReservations;
 
-/*
-// Define the connection string to the SQL Server database
-string connectionString = "Data Source=(local);Initial Catalog=prenotazioni;Integrated Security=True";
-*/
+Reservation reservation = new Reservation();
+setScelta();
 
-// Define the SQL query to select data from the 'clienti' table
-string queryString = "SELECT * FROM clienti WHERE id_cliente < 10";
-
-// Declare ADO.NET objects
-SqlConnection connection;               // Represents a connection to the database
-SqlCommand command;                     // Represents a SQL command to be executed
-SqlDataReader reader;                   // Represents a forward-only stream of data from the database
-SqlDataAdapter adapter;                 // Represents a set of data commands
-DataTable dataTable;                    // Represents an in-memory table to store data
-
-/*
-// Create a connection to the database using the connection string
-using (connection = new SqlConnection(connectionString))
+#region "Stampa Menu"
+int stampaMenu()
 {
-    #region "Lettura Database Reader"
-    // Create a SQL command with the query and the database connection
-    command = new SqlCommand(queryString, connection);
+    int answer;
 
-    // Open the database connection
-    connection.Open();
+    Console.WriteLine("\n---------------------------------");
 
-    // Execute the SQL query and retrieve the results into a SqlDataReader
-    reader = command.ExecuteReader();
+    // Display the menu options
+    Console.WriteLine("\n1) VISUALIZZARE TUTTI I CLIENTI");
+    Console.WriteLine("2) VISUALIZZARE CLIENTE (NOME - COGNOME)");
+    Console.WriteLine("3) VISUALIZZARE TUTTE LE PRENOTAZIONI");
+    Console.WriteLine("4) VISUALIZZARE PRENOTAZIONE (ID)");
+    Console.WriteLine("5) VISUALIZZARE PRENOTAZIONE (NOME - COGNOME)");
+    Console.WriteLine("0) USCIRE");
 
-    // Iterate through the result set and print the data
-    while (reader.Read()) {
-        // Retrieve and print the values from the reader
-        Console.WriteLine("{0}\t{1}\t\t{2}", reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
-    }
+    do
+    {
+        // Prompt the user to select an action and read the input as an integer
+        Console.Write("\nSelezionare l'Azione da Eseguire (0-5): ");
+        answer = Int32.Parse(Console.ReadLine());
+    } while (answer < 0 || answer > 5);
 
-    // Close the SqlDataReader to release resources
-    reader.Close();
-    #endregion
+    return answer;
+}
+#endregion
 
-// ------------------------------------------------------------------------------------------------
+#region "Set Scelta"
+void setScelta()
+{
+    int menu;
 
-    Console.WriteLine("\n--------------------------------------------------\n");
+    do
+    {
+        // Display the menu and get the user's selection
+        menu = stampaMenu();
 
-// ------------------------------------------------------------------------------------------------
+        switch (menu)
+        {
+            case 1:
+                printClienti(reservation.Customers());
+                break;
+            case 2:
+                CustomersNameSurname(reservation);
+                break;
+            case 3:
+                reservation.Reservations();
+                break;
+            case 4:
+                int idReservations;
 
-    #region "Lettura Database DataSet"
-    // Create a new SqlDataAdapter and associate it with a query string and a database connection.
-    adapter = new SqlDataAdapter(queryString, connection);
+                do
+                {
+                    Console.Write("\nID: ");
+                    idReservations = Int32.Parse(Console.ReadLine());
+                } while (idReservations < 0);
 
-    // Create a new DataSet to store retrieved data from the database.
-    DataSet dataSet = new DataSet();
+                reservation.Reservations(idReservations);
+                break;
+            case 5:
+                string firstNameReservations;
+                Console.Write("\nFirst Name: ");
+                firstNameReservations = Console.ReadLine();
 
-    // Populate the DataSet with data from the database using the SqlDataAdapter.
-    adapter.Fill(dataSet, "Clienti");
+                string secondNameReservations;
+                Console.Write("\nSecond Name: ");
+                secondNameReservations = Console.ReadLine();
 
-    // Retrieve the table named "Clienti" from the DataSet and store it in a variable.
-    dataTable = dataSet.Tables["Clienti"];
+                reservation.Reservations(firstNameReservations, secondNameReservations);
+                break;
+            case 0:
+                // Action 0: Exit the program (commented out)
+                //Environment.Exit(0);              // CHIUDE IL PROGRAMMA
+                break;
+            default:
+                Console.WriteLine("ERROR");
+                break;
+        }
+    } while (menu != 0);
+}
+#endregion
 
-    // Iterate through each row in the "Clienti" table.
-    foreach (DataRow row in dataTable.Rows)
+void CustomersNameSurname(Reservation reservation)
+{
+    string firstNameCustomers;
+    Console.Write("\nFirst Name: ");
+    firstNameCustomers = Console.ReadLine();
+
+    string secondNameCustomers;
+    Console.Write("Second Name: ");
+    secondNameCustomers = Console.ReadLine();
+
+    printClienti(reservation.Customers(firstNameCustomers, secondNameCustomers));
+}
+
+#region "Print Clienti"
+void printClienti(DataTable clienti)
+{
+    foreach (DataRow row in clienti.Rows)
     {
         // Print the values of "id_cliente," "nome," and "cognome" columns for the current row to the console.
-        Console.WriteLine($"{row["id_cliente"]} \t{row["nome"],-10} \t{row["cognome"]}");
+        Console.WriteLine($"{row["id_cliente"], -5} \t{row["nome"],-10} \t{row["cognome"], -10} \t{row["dataNascita"], -10} \t{row["NomeCitta"]}");
     }
-    #endregion
+}
+#endregion
 
-// ------------------------------------------------------------------------------------------------
-
-    Console.WriteLine("\n--------------------------------------------------\n");
-
-// ------------------------------------------------------------------------------------------------
-
-    #region " Lettura Database con Parametri"
-        string textNome, textCognome;
-
-    Console.Write("Nome: ");
-    textNome = Console.ReadLine();
-
-    Console.Write("Cognome: ");
-    textCognome = Console.ReadLine();
-
-    queryString = "SELECT * FROM prenotazioni JOIN clienti ON prenotazioni.cliente = clienti.ID_cliente " +
-        "WHERE nome = '" + textNome + "' AND cognome = '" + textCognome + "'";
-
-    // Create a new SqlDataAdapter and associate it with a query string and a database connection.
-    adapter = new SqlDataAdapter(queryString, connection);
-
-    // Create a new DataSet to store retrieved data from the database.
-    dataSet = new DataSet();
-
-    // Populate the DataSet with data from the database using the SqlDataAdapter.
-    adapter.Fill(dataSet, "Clienti");
-
-    // Retrieve the table named "Clienti" from the DataSet and store it in a variable.
-    dataTable = dataSet.Tables["Clienti"];
-
-    // Iterate through each row in the "Clienti" table.
-    foreach (DataRow row in dataTable.Rows)
+#region "Print Prenotazioni"
+void printPrenotazioni(DataTable clienti)
+{
+    foreach (DataRow row in clienti.Rows)
     {
         // Print the values of "id_cliente," "nome," and "cognome" columns for the current row to the console.
-        Console.WriteLine($"{row["nome"]} \t{row["cognome"],-10} \t{row["arrivo"], -10} \t" +
-            $"{ row["partenza"]} \t{ row["importo"],-10} \t{ row["tipo_struttura"], -10}");
+        Console.WriteLine($"{row["nome"],-10} \t{row["cognome"],-10} \t{row["dataNascita"],-10} \t{row["NomeCitta"]}");
     }
-    #endregion
-
-// ------------------------------------------------------------------------------------------------
-
-*/
+}
+#endregion
