@@ -17,6 +17,7 @@ DataTable dataTable;                    // Represents an in-memory table to stor
 // Create a connection to the database using the connection string
 using (connection = new SqlConnection(connectionString))
 {
+
     // Create a SQL command with the query and the database connection
     command = new SqlCommand(queryString, connection);
 
@@ -34,4 +35,93 @@ using (connection = new SqlConnection(connectionString))
 
     // Close the SqlDataReader to release resources
     reader.Close();
+
+// ------------------------------------------------------------------------------------------------
+
+    Console.WriteLine("\n--------------------------------------------------\n");
+
+// ------------------------------------------------------------------------------------------------
+
+    // Create a new SqlDataAdapter and associate it with a query string and a database connection.
+    adapter = new SqlDataAdapter(queryString, connection);
+
+    // Create a new DataSet to store retrieved data from the database.
+    DataSet dataSet = new DataSet();
+
+    // Populate the DataSet with data from the database using the SqlDataAdapter.
+    adapter.Fill(dataSet, "Clienti");
+
+    // Retrieve the table named "Clienti" from the DataSet and store it in a variable.
+    dataTable = dataSet.Tables["Clienti"];
+
+    // Iterate through each row in the "Clienti" table.
+    foreach (DataRow row in dataTable.Rows)
+    {
+        // Print the values of "id_cliente," "nome," and "cognome" columns for the current row to the console.
+        Console.WriteLine($"{row["id_cliente"]} \t{row["nome"], -10} \t{row["cognome"]}");
+    }
+
+// ------------------------------------------------------------------------------------------------
+
+    Console.WriteLine("\n--------------------------------------------------\n");
+
+// ------------------------------------------------------------------------------------------------
+
+    string textNome, textCognome;
+
+    Console.Write("Nome: ");
+    textNome = Console.ReadLine();
+
+    Console.Write("Cognome: ");
+    textCognome = Console.ReadLine();
+
+    queryString = "SELECT * FROM prenotazioni JOIN clienti ON prenotazioni.cliente = clienti.ID_cliente " +
+        "WHERE nome = '" + textNome + "' AND cognome = '" + textCognome + "'";
+
+    // Create a new SqlDataAdapter and associate it with a query string and a database connection.
+    adapter = new SqlDataAdapter(queryString, connection);
+
+    // Create a new DataSet to store retrieved data from the database.
+    dataSet = new DataSet();
+
+    // Populate the DataSet with data from the database using the SqlDataAdapter.
+    adapter.Fill(dataSet, "Clienti");
+
+    // Retrieve the table named "Clienti" from the DataSet and store it in a variable.
+    dataTable = dataSet.Tables["Clienti"];
+
+    // Iterate through each row in the "Clienti" table.
+    foreach (DataRow row in dataTable.Rows)
+    {
+        // Print the values of "id_cliente," "nome," and "cognome" columns for the current row to the console.
+        Console.WriteLine($"{row["nome"]} \t{row["cognome"],-10} \t{row["arrivo"], -10} \t" +
+            $"{ row["partenza"]} \t{ row["importo"],-10} \t{ row["tipo_struttura"], -10}");
+    }
+    
+// ------------------------------------------------------------------------------------------------
+
+    Console.WriteLine("\n--------------------------------------------------\n");
+
+// ------------------------------------------------------------------------------------------------
+
+    string regione, areaGeografica;
+
+    Console.Write("Regione: ");
+    regione = Console.ReadLine();
+
+    Console.Write("Area Geografica: ");
+    areaGeografica = Console.ReadLine();
+
+    queryString = "INSERT INTO regioni (regione, area_geografica) " +
+        "VALUES ('" + regione + "', '" + areaGeografica + "')";
+
+    // Create a SQL command with the query and the database connection
+    command = new SqlCommand(queryString, connection);
+
+    // Open the database connection
+    connection.Open();
+
+    command.ExecuteNonQuery();
+
+    // ------------------------------------------------------------------------------------------------
 }
