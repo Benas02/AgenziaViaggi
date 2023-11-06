@@ -34,11 +34,15 @@ namespace ReservationManager {
         
         private regioniDataTable tableregioni;
         
+        private NomeCognomeDataTable tableNomeCognome;
+        
         private global::System.Data.DataRelation relationFK_citta_regioni;
         
         private global::System.Data.DataRelation relationFK_clienti_citta;
         
         private global::System.Data.DataRelation relationFK_prenotazioni_clienti;
+        
+        private global::System.Data.DataRelation relationFK_prenotazioni_clienti1;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -82,6 +86,9 @@ namespace ReservationManager {
                 }
                 if ((ds.Tables["regioni"] != null)) {
                     base.Tables.Add(new regioniDataTable(ds.Tables["regioni"]));
+                }
+                if ((ds.Tables["NomeCognome"] != null)) {
+                    base.Tables.Add(new NomeCognomeDataTable(ds.Tables["NomeCognome"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -148,6 +155,16 @@ namespace ReservationManager {
         public regioniDataTable regioni {
             get {
                 return this.tableregioni;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public NomeCognomeDataTable NomeCognome {
+            get {
+                return this.tableNomeCognome;
             }
         }
         
@@ -233,6 +250,9 @@ namespace ReservationManager {
                 if ((ds.Tables["regioni"] != null)) {
                     base.Tables.Add(new regioniDataTable(ds.Tables["regioni"]));
                 }
+                if ((ds.Tables["NomeCognome"] != null)) {
+                    base.Tables.Add(new NomeCognomeDataTable(ds.Tables["NomeCognome"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -296,9 +316,16 @@ namespace ReservationManager {
                     this.tableregioni.InitVars();
                 }
             }
+            this.tableNomeCognome = ((NomeCognomeDataTable)(base.Tables["NomeCognome"]));
+            if ((initTable == true)) {
+                if ((this.tableNomeCognome != null)) {
+                    this.tableNomeCognome.InitVars();
+                }
+            }
             this.relationFK_citta_regioni = this.Relations["FK_citta_regioni"];
             this.relationFK_clienti_citta = this.Relations["FK_clienti_citta"];
             this.relationFK_prenotazioni_clienti = this.Relations["FK_prenotazioni_clienti"];
+            this.relationFK_prenotazioni_clienti1 = this.Relations["FK_prenotazioni_clienti1"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -319,6 +346,8 @@ namespace ReservationManager {
             base.Tables.Add(this.tableprenotazioni_backup);
             this.tableregioni = new regioniDataTable();
             base.Tables.Add(this.tableregioni);
+            this.tableNomeCognome = new NomeCognomeDataTable();
+            base.Tables.Add(this.tableNomeCognome);
             this.relationFK_citta_regioni = new global::System.Data.DataRelation("FK_citta_regioni", new global::System.Data.DataColumn[] {
                         this.tableregioni.ID_regioneColumn}, new global::System.Data.DataColumn[] {
                         this.tablecitta.regioneColumn}, false);
@@ -331,6 +360,10 @@ namespace ReservationManager {
                         this.tableclienti.ID_clienteColumn}, new global::System.Data.DataColumn[] {
                         this.tableprenotazioni.clienteColumn}, false);
             this.Relations.Add(this.relationFK_prenotazioni_clienti);
+            this.relationFK_prenotazioni_clienti1 = new global::System.Data.DataRelation("FK_prenotazioni_clienti1", new global::System.Data.DataColumn[] {
+                        this.tableNomeCognome.ID_clienteColumn}, new global::System.Data.DataColumn[] {
+                        this.tableprenotazioni.clienteColumn}, false);
+            this.Relations.Add(this.relationFK_prenotazioni_clienti1);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -360,6 +393,12 @@ namespace ReservationManager {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializeregioni() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeNomeCognome() {
             return false;
         }
         
@@ -432,6 +471,9 @@ namespace ReservationManager {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void regioniRowChangeEventHandler(object sender, regioniRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void NomeCognomeRowChangeEventHandler(object sender, NomeCognomeRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -2146,6 +2188,284 @@ namespace ReservationManager {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class NomeCognomeDataTable : global::System.Data.TypedTableBase<NomeCognomeRow> {
+            
+            private global::System.Data.DataColumn columnID_cliente;
+            
+            private global::System.Data.DataColumn columnNome;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public NomeCognomeDataTable() {
+                this.TableName = "NomeCognome";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal NomeCognomeDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected NomeCognomeDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ID_clienteColumn {
+                get {
+                    return this.columnID_cliente;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn NomeColumn {
+                get {
+                    return this.columnNome;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public NomeCognomeRow this[int index] {
+                get {
+                    return ((NomeCognomeRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event NomeCognomeRowChangeEventHandler NomeCognomeRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event NomeCognomeRowChangeEventHandler NomeCognomeRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event NomeCognomeRowChangeEventHandler NomeCognomeRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event NomeCognomeRowChangeEventHandler NomeCognomeRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddNomeCognomeRow(NomeCognomeRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public NomeCognomeRow AddNomeCognomeRow(string Nome) {
+                NomeCognomeRow rowNomeCognomeRow = ((NomeCognomeRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        Nome};
+                rowNomeCognomeRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowNomeCognomeRow);
+                return rowNomeCognomeRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public NomeCognomeRow FindByID_cliente(int ID_cliente) {
+                return ((NomeCognomeRow)(this.Rows.Find(new object[] {
+                            ID_cliente})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                NomeCognomeDataTable cln = ((NomeCognomeDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new NomeCognomeDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnID_cliente = base.Columns["ID_cliente"];
+                this.columnNome = base.Columns["Nome"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnID_cliente = new global::System.Data.DataColumn("ID_cliente", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID_cliente);
+                this.columnNome = new global::System.Data.DataColumn("Nome", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNome);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnID_cliente}, true));
+                this.columnID_cliente.AutoIncrement = true;
+                this.columnID_cliente.AutoIncrementSeed = -1;
+                this.columnID_cliente.AutoIncrementStep = -1;
+                this.columnID_cliente.AllowDBNull = false;
+                this.columnID_cliente.ReadOnly = true;
+                this.columnID_cliente.Unique = true;
+                this.columnNome.ReadOnly = true;
+                this.columnNome.MaxLength = 201;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public NomeCognomeRow NewNomeCognomeRow() {
+                return ((NomeCognomeRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new NomeCognomeRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(NomeCognomeRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.NomeCognomeRowChanged != null)) {
+                    this.NomeCognomeRowChanged(this, new NomeCognomeRowChangeEvent(((NomeCognomeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.NomeCognomeRowChanging != null)) {
+                    this.NomeCognomeRowChanging(this, new NomeCognomeRowChangeEvent(((NomeCognomeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.NomeCognomeRowDeleted != null)) {
+                    this.NomeCognomeRowDeleted(this, new NomeCognomeRowChangeEvent(((NomeCognomeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.NomeCognomeRowDeleting != null)) {
+                    this.NomeCognomeRowDeleting(this, new NomeCognomeRowChangeEvent(((NomeCognomeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveNomeCognomeRow(NomeCognomeRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                prenotazioniDataSet ds = new prenotazioniDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "NomeCognomeDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class cittaRow : global::System.Data.DataRow {
@@ -2649,6 +2969,17 @@ namespace ReservationManager {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public NomeCognomeRow NomeCognomeRow {
+                get {
+                    return ((NomeCognomeRow)(this.GetParentRow(this.Table.ParentRelations["FK_prenotazioni_clienti1"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_prenotazioni_clienti1"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IscameraNull() {
                 return this.IsNull(this.tableprenotazioni.cameraColumn);
             }
@@ -3131,6 +3462,71 @@ namespace ReservationManager {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class NomeCognomeRow : global::System.Data.DataRow {
+            
+            private NomeCognomeDataTable tableNomeCognome;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal NomeCognomeRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableNomeCognome = ((NomeCognomeDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int ID_cliente {
+                get {
+                    return ((int)(this[this.tableNomeCognome.ID_clienteColumn]));
+                }
+                set {
+                    this[this.tableNomeCognome.ID_clienteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Nome {
+                get {
+                    try {
+                        return ((string)(this[this.tableNomeCognome.NomeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Il valore della colonna \'Nome\' nella tabella \'NomeCognome\' è DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNomeCognome.NomeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsNomeNull() {
+                return this.IsNull(this.tableNomeCognome.NomeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetNomeNull() {
+                this[this.tableNomeCognome.NomeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public prenotazioniRow[] GetprenotazioniRows() {
+                if ((this.Table.ChildRelations["FK_prenotazioni_clienti1"] == null)) {
+                    return new prenotazioniRow[0];
+                }
+                else {
+                    return ((prenotazioniRow[])(base.GetChildRows(this.Table.ChildRelations["FK_prenotazioni_clienti1"])));
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -3286,6 +3682,40 @@ namespace ReservationManager {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public regioniRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class NomeCognomeRowChangeEvent : global::System.EventArgs {
+            
+            private NomeCognomeRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public NomeCognomeRowChangeEvent(NomeCognomeRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public NomeCognomeRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -5454,6 +5884,258 @@ SELECT ID_regione, regione, area_geografica FROM regioni WHERE (ID_regione = @ID
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class NomeCognomeTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public NomeCognomeTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "NomeCognome";
+            tableMapping.ColumnMappings.Add("ID_cliente", "ID_cliente");
+            tableMapping.ColumnMappings.Add("Nome", "Nome");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [clienti] WHERE (([ID_cliente] = @Original_ID_cliente))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ID_cliente", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID_cliente", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [clienti] DEFAULT VALUES;\r\nSELECT ID_cliente, { fn CONCAT(cognome, \' " +
+                "\', nome) } AS Nome FROM clienti WHERE (ID_cliente = SCOPE_IDENTITY()) ORDER BY n" +
+                "ome";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::ReservationManager.Properties.Settings.Default.prenotazioniConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT clienti.ID_cliente, CONCAT(cognome, \' \', nome) as [Nome]\r\nFROM clienti\r\nOR" +
+                "DER BY [Nome]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(prenotazioniDataSet.NomeCognomeDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual prenotazioniDataSet.NomeCognomeDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            prenotazioniDataSet.NomeCognomeDataTable dataTable = new prenotazioniDataSet.NomeCognomeDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(prenotazioniDataSet.NomeCognomeDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(prenotazioniDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "NomeCognome");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_ID_cliente) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID_cliente));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert() {
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5474,6 +6156,8 @@ SELECT ID_regione, regione, area_geografica FROM regioni WHERE (ID_regione = @ID
         private prenotazioni_backupTableAdapter _prenotazioni_backupTableAdapter;
         
         private regioniTableAdapter _regioniTableAdapter;
+        
+        private NomeCognomeTableAdapter _nomeCognomeTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -5562,6 +6246,20 @@ SELECT ID_regione, regione, area_geografica FROM regioni WHERE (ID_regione = @ID
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public NomeCognomeTableAdapter NomeCognomeTableAdapter {
+            get {
+                return this._nomeCognomeTableAdapter;
+            }
+            set {
+                this._nomeCognomeTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -5599,6 +6297,10 @@ SELECT ID_regione, regione, area_geografica FROM regioni WHERE (ID_regione = @ID
                             && (this._regioniTableAdapter.Connection != null))) {
                     return this._regioniTableAdapter.Connection;
                 }
+                if (((this._nomeCognomeTableAdapter != null) 
+                            && (this._nomeCognomeTableAdapter.Connection != null))) {
+                    return this._nomeCognomeTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -5625,6 +6327,9 @@ SELECT ID_regione, regione, area_geografica FROM regioni WHERE (ID_regione = @ID
                     count = (count + 1);
                 }
                 if ((this._regioniTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._nomeCognomeTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -5662,6 +6367,15 @@ SELECT ID_regione, regione, area_geografica FROM regioni WHERE (ID_regione = @ID
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._clientiTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._nomeCognomeTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.NomeCognome.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._nomeCognomeTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -5717,6 +6431,14 @@ SELECT ID_regione, regione, area_geografica FROM regioni WHERE (ID_regione = @ID
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._nomeCognomeTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.NomeCognome.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._nomeCognomeTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._prenotazioniTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.prenotazioni.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -5756,6 +6478,14 @@ SELECT ID_regione, regione, area_geografica FROM regioni WHERE (ID_regione = @ID
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._prenotazioniTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._nomeCognomeTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.NomeCognome.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._nomeCognomeTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -5847,6 +6577,11 @@ SELECT ID_regione, regione, area_geografica FROM regioni WHERE (ID_regione = @ID
                 throw new global::System.ArgumentException("Tutti gli oggetti TableAdapter gestiti da TableAdapterManager devono utilizzare l" +
                         "a stessa stringa di connessione.");
             }
+            if (((this._nomeCognomeTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._nomeCognomeTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Tutti gli oggetti TableAdapter gestiti da TableAdapterManager devono utilizzare l" +
+                        "a stessa stringa di connessione.");
+            }
             global::System.Data.IDbConnection workConnection = this.Connection;
             if ((workConnection == null)) {
                 throw new global::System.ApplicationException("TableAdapterManager non contiene informazioni di connessione. Impostare la propri" +
@@ -5923,6 +6658,15 @@ SELECT ID_regione, regione, area_geografica FROM regioni WHERE (ID_regione = @ID
                     if (this._regioniTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._regioniTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._regioniTableAdapter.Adapter);
+                    }
+                }
+                if ((this._nomeCognomeTableAdapter != null)) {
+                    revertConnections.Add(this._nomeCognomeTableAdapter, this._nomeCognomeTableAdapter.Connection);
+                    this._nomeCognomeTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._nomeCognomeTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._nomeCognomeTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._nomeCognomeTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._nomeCognomeTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -6002,6 +6746,10 @@ SELECT ID_regione, regione, area_geografica FROM regioni WHERE (ID_regione = @ID
                 if ((this._regioniTableAdapter != null)) {
                     this._regioniTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._regioniTableAdapter]));
                     this._regioniTableAdapter.Transaction = null;
+                }
+                if ((this._nomeCognomeTableAdapter != null)) {
+                    this._nomeCognomeTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._nomeCognomeTableAdapter]));
+                    this._nomeCognomeTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

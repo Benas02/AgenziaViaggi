@@ -27,6 +27,8 @@ namespace ReservationManager
 
         private void frmPrenotazioni_Load(object sender, EventArgs e)
         {
+            // TODO: questa riga di codice carica i dati nella tabella 'prenotazioniDataSet.NomeCognome'. È possibile spostarla o rimuoverla se necessario.
+            this.nomeCognomeTableAdapter.Fill(this.prenotazioniDataSet.NomeCognome);
             // TODO: questa riga di codice carica i dati nella tabella 'prenotazioniDataSet.clienti'. È possibile spostarla o rimuoverla se necessario.
             this.clientiTableAdapter.Fill(this.prenotazioniDataSet.clienti);
             // TODO: questa riga di codice carica i dati nella tabella 'prenotazioniDataSet.prenotazioni'. È possibile spostarla o rimuoverla se necessario.

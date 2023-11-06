@@ -37,8 +37,8 @@
             System.Windows.Forms.Label tipo_strutturaLabel;
             System.Windows.Forms.Label giorni_permanenzaLabel;
             System.Windows.Forms.Label costo_giornalieroLabel;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrenotazioni));
             System.Windows.Forms.Label clienteLabel1;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrenotazioni));
             this.prenotazioniDataSet = new ReservationManager.prenotazioniDataSet();
             this.prenotazioniBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.prenotazioniTableAdapter = new ReservationManager.prenotazioniDataSetTableAdapters.prenotazioniTableAdapter();
@@ -79,6 +79,8 @@
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomeCognomeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.nomeCognomeTableAdapter = new ReservationManager.prenotazioniDataSetTableAdapters.NomeCognomeTableAdapter();
             arrivoLabel = new System.Windows.Forms.Label();
             partenzaLabel = new System.Windows.Forms.Label();
             cameraLabel = new System.Windows.Forms.Label();
@@ -94,6 +96,7 @@
             this.prenotazioniBindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientiBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.prenotazioniDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nomeCognomeBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // arrivoLabel
@@ -168,6 +171,15 @@
             costo_giornalieroLabel.TabIndex = 15;
             costo_giornalieroLabel.Text = "costo giornaliero:";
             // 
+            // clienteLabel1
+            // 
+            clienteLabel1.AutoSize = true;
+            clienteLabel1.Location = new System.Drawing.Point(231, 210);
+            clienteLabel1.Name = "clienteLabel1";
+            clienteLabel1.Size = new System.Drawing.Size(49, 16);
+            clienteLabel1.TabIndex = 20;
+            clienteLabel1.Text = "cliente:";
+            // 
             // prenotazioniDataSet
             // 
             this.prenotazioniDataSet.DataSetName = "prenotazioniDataSet";
@@ -187,6 +199,7 @@
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.cittaTableAdapter = null;
             this.tableAdapterManager.clientiTableAdapter = null;
+            this.tableAdapterManager.NomeCognomeTableAdapter = null;
             this.tableAdapterManager.prenotazioni_backupTableAdapter = null;
             this.tableAdapterManager.prenotazioniTableAdapter = this.prenotazioniTableAdapter;
             this.tableAdapterManager.regioniTableAdapter = null;
@@ -219,7 +232,7 @@
             this.prenotazioniBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.prenotazioniBindingNavigator.Name = "prenotazioniBindingNavigator";
             this.prenotazioniBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.prenotazioniBindingNavigator.Size = new System.Drawing.Size(800, 31);
+            this.prenotazioniBindingNavigator.Size = new System.Drawing.Size(800, 27);
             this.prenotazioniBindingNavigator.TabIndex = 0;
             this.prenotazioniBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -229,7 +242,7 @@
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
             this.bindingNavigatorAddNewItem.Text = "Aggiungi nuovo";
             // 
             // bindingNavigatorCountItem
@@ -392,21 +405,12 @@
             this.newCliente.UseVisualStyleBackColor = true;
             this.newCliente.Click += new System.EventHandler(this.newCliente_Click);
             // 
-            // clienteLabel1
-            // 
-            clienteLabel1.AutoSize = true;
-            clienteLabel1.Location = new System.Drawing.Point(231, 210);
-            clienteLabel1.Name = "clienteLabel1";
-            clienteLabel1.Size = new System.Drawing.Size(49, 16);
-            clienteLabel1.TabIndex = 20;
-            clienteLabel1.Text = "cliente:";
-            // 
             // clienteComboBox
             // 
             this.clienteComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.prenotazioniBindingSource, "cliente", true));
             this.clienteComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.clientiBindingSource, "cognome", true));
-            this.clienteComboBox.DataSource = this.clientiBindingSource;
-            this.clienteComboBox.DisplayMember = "cognome";
+            this.clienteComboBox.DataSource = this.nomeCognomeBindingSource;
+            this.clienteComboBox.DisplayMember = "Nome";
             this.clienteComboBox.FormattingEnabled = true;
             this.clienteComboBox.Location = new System.Drawing.Point(286, 207);
             this.clienteComboBox.Name = "clienteComboBox";
@@ -530,6 +534,15 @@
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.Width = 125;
             // 
+            // nomeCognomeBindingSource
+            // 
+            this.nomeCognomeBindingSource.DataMember = "NomeCognome";
+            this.nomeCognomeBindingSource.DataSource = this.prenotazioniDataSet;
+            // 
+            // nomeCognomeTableAdapter
+            // 
+            this.nomeCognomeTableAdapter.ClearBeforeFill = true;
+            // 
             // frmPrenotazioni
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -566,6 +579,7 @@
             this.prenotazioniBindingNavigator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientiBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.prenotazioniDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nomeCognomeBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -613,5 +627,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.BindingSource nomeCognomeBindingSource;
+        private prenotazioniDataSetTableAdapters.NomeCognomeTableAdapter nomeCognomeTableAdapter;
     }
 }
