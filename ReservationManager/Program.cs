@@ -19,7 +19,9 @@ namespace ReservationManager
 
             //Application.Run(new frmClienti());
             //Application.Run(new frmCitta());
-            Application.Run(new frmPrenotazioni());
+            Application.Run(new frmRegioni());
+            //Application.Run(new frmPrenotazioni());
+            //Application.Run(new frmMenu());
         }
     }
 }
