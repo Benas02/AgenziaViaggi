@@ -37,5 +37,13 @@ namespace ReservationManager
             this.clientiTableAdapter.Fill(this.prenotazioniDataSet.clienti);
 
         }
+
+        private void newCitta_Click(object sender, EventArgs e)
+        {
+            frmCitta cityForm = new frmCitta();
+            cityForm.ShowDialog();
+
+            this.cittaTableAdapter.Fill(this.prenotazioniDataSet.citta);
+        }
     }
 }
