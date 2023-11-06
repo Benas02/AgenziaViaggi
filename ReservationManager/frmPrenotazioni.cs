@@ -25,11 +25,21 @@ namespace ReservationManager
 
         }
 
-        private void Prenotazioni_Load(object sender, EventArgs e)
+        private void frmPrenotazioni_Load(object sender, EventArgs e)
         {
+            // TODO: questa riga di codice carica i dati nella tabella 'prenotazioniDataSet.clienti'. È possibile spostarla o rimuoverla se necessario.
+            this.clientiTableAdapter.Fill(this.prenotazioniDataSet.clienti);
             // TODO: questa riga di codice carica i dati nella tabella 'prenotazioniDataSet.prenotazioni'. È possibile spostarla o rimuoverla se necessario.
             this.prenotazioniTableAdapter.Fill(this.prenotazioniDataSet.prenotazioni);
 
+        }
+
+        private void newCliente_Click(object sender, EventArgs e)
+        {
+            frmClienti clienteForm = new frmClienti();
+            clienteForm.ShowDialog();
+
+            this.clientiTableAdapter.Fill(this.prenotazioniDataSet.clienti);
         }
     }
 }
