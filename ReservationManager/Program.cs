@@ -16,7 +16,8 @@ namespace ReservationManager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmClienti());
+            //Application.Run(new frmClienti());
+            Application.Run(new frmCitta());
         }
     }
 }
