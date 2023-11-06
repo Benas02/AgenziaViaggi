@@ -16,5 +16,29 @@ namespace ReservationManager
         {
             InitializeComponent();
         }
+
+        private void Regioni_Click(object sender, EventArgs e)
+        {
+            frmRegioni frmRegioni = new frmRegioni();
+            frmRegioni.ShowDialog();
+        }
+
+        private void Citta_Click(object sender, EventArgs e)
+        {
+            frmCitta frmCitta = new frmCitta();
+            frmCitta.ShowDialog();
+        }
+
+        private void Clienti_Click(object sender, EventArgs e)
+        {
+            frmClienti frmClienti = new frmClienti();
+            frmClienti.ShowDialog();
+        }
+
+        private void Prenotazioni_Click(object sender, EventArgs e)
+        {
+            frmPrenotazioni frmPrenotazioni = new frmPrenotazioni();
+            frmPrenotazioni.ShowDialog();
+        }
     }
 }
